@@ -203,14 +203,16 @@ const index = async (req, res, next) => {
 
     if (tags.length) {
       let tagsResult = await Tag.find({ name: { $in: tags } });
-      criteria = {
-        ...criteria,
-        tags: { $in: tagsResult.map((tag) => tag._id) },
-      };
+      if (tagsResult.length > 0) {
+        criteria = {
+          ...criteria,
+          tags: { $in: tagsResult.map((tag) => tag._id) },
+        };
+      }
     }
 
     let count = await Product.find().countDocuments();
-    let product = await Product.find({ criteria })
+    let product = await Product.find(criteria)
       .skip(parseInt(skip))
       .limit(parseInt(limit))
       .populate('category')

@@ -15,7 +15,7 @@ router.put(
 router.post(
   '/products',
   multer({ dest: os.tmpdir() }).single('image'),
-  checkPolicy('create', 'Product'),
+  // checkPolicy('create', 'Product'),
   productController.store
 );
 
