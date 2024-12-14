@@ -45,7 +45,10 @@ const localStrategy = async (email, password, done) => {
 
 const login = async (req, res, next) => {
   passport.authenticate('local', async function (err, user) {
-    if (err) return next(err);
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
 
     if (!user)
       return res.json({ error: 1, message: 'Email or Password incorrect' });
