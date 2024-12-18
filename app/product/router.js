@@ -21,7 +21,7 @@ router.post(
 
 router.delete(
   '/products/:id',
-  checkPolicy('delete', 'Product'),
+  // checkPolicy('delete', 'Product'),
   productController.destroy
 );
 
