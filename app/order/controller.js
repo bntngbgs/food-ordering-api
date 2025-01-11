@@ -1,5 +1,5 @@
 const CartItem = require('../cart-item/model');
-const DelveryAddress = require('../deliveryAddress/model');
+const DeliveryAddress = require('../deliveryAddress/model');
 const Order = require('../order/model');
 const { Types } = require('mongoose');
 const OrderItem = require('../order-item/model');
@@ -11,10 +11,10 @@ const store = async (req, res, next) => {
     if (!items) {
       return res.json({
         error: 1,
-        message: `You're not create order because you not have anything in the cart`,
+        message: `You can't create order because you not have anything in the cart`,
       });
     }
-    let address = await delivery_address.findById(delivery_address);
+    let address = await DeliveryAddress.findById(delivery_address);
     let order = new Order({
       _id: new Types.ObjectId(),
       status: 'waiting_payment',
@@ -29,7 +29,7 @@ const store = async (req, res, next) => {
       user: req.user._id,
     });
 
-    let orderItems = await OrderItem.inserMany(
+    let orderItems = await OrderItem.insertMany(
       items.map((item) => ({
         ...item,
         name: item.product.name,

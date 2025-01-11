@@ -27,4 +27,4 @@ const cartItemSchema = Schema({
   },
 });
 
-model.exports = model('CartItem', cartItemSchema);
+module.exports = model('CartItem', cartItemSchema);

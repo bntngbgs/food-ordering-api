@@ -3,9 +3,15 @@ const CartItem = require('../cart-item/model');
 
 const update = async (req, res, next) => {
   try {
-    const { items } = req.body;
+    const items = req.body;
+    console.log(req.body);
+
     const productIds = items.map((item) => item.product._id);
+    console.log(productIds);
+
     const products = await Product.find({ _id: { $in: productIds } });
+    console.log(products);
+
     let cartItems = items.map((item) => {
       let relatedProduct = products.find(
         (product) => product._id.toString() === item.product._id
@@ -19,8 +25,10 @@ const update = async (req, res, next) => {
         qty: item.qty,
       };
     });
+    console.log(cartItems);
 
     await CartItem.deleteMany({ user: req.user._id });
+
     await CartItem.bulkWrite(
       cartItems.map((item) => {
         return {
@@ -35,9 +43,9 @@ const update = async (req, res, next) => {
         };
       })
     );
-    return res.json(carttems);
+    return res.json(cartItems);
   } catch (err) {
-    if (err && err.name === 'ValdatonError') {
+    if (err && err.name === 'ValidatonError') {
       return res.json({
         error: 1,
         message: err.message,
@@ -53,7 +61,7 @@ const index = async (req, res, next) => {
 
     return res.json(items);
   } catch (err) {
-    if (err && err.name === 'ValdatonError') {
+    if (err && err.name === 'ValidatonError') {
       return res.json({
         error: 1,
         message: err.message,
