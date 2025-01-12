@@ -34,6 +34,7 @@ const orderSchema = Schema(
 );
 
 orderSchema.plugin(AutoIncrement, { inc_field: 'order_number' });
+
 orderSchema.virtual('items-count').get(function () {
   return this.order_items.reduce(
     (total, item) => total + parseInt(item.qty),
