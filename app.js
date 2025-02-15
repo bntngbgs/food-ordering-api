@@ -42,7 +42,7 @@ app.use('/', (req, res) => {
   // res.render('index', {
   //   title: 'Food Ordering API Service',
   // });
-  req.json({ message: 'this is home' });
+  res.json({ message: 'this is home' });
 });
 
 // catch 404 and forward to error handler
