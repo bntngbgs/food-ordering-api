@@ -31,7 +31,7 @@ const deliveryAddressSchema = Schema(
     detail: {
       type: String,
       required: [true, 'Detail alamat harus diisi'],
-      maxlength: [1000, 'Panjang maksimal detail alamat adalah 10000 karakter'],
+      maxlength: [1000, 'Panjang maksimal detail alamat adalah 1000 karakter'],
     },
     user: {
       type: Schema.Types.ObjectId,
