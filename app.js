@@ -39,10 +39,10 @@ app.use('/api', invoiceRoute);
 
 // home
 app.use('/', (req, res) => {
-  // res.render('index', {
-  //   title: 'Food Ordering API Service',
-  // });
-  res.json({ message: 'this is home' });
+  res.render('index', {
+    title: 'Food Ordering API Service',
+  });
+  // res.json({ message: 'this is home' });
 });
 
 // catch 404 and forward to error handler
